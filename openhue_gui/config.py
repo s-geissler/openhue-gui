@@ -5,7 +5,7 @@ import json
 import logging
 from pathlib import Path
 from typing import Optional
-from modes_schema import Config, Mode
+from .modes_schema import Config, Mode
 
 logger = logging.getLogger(__name__)
 

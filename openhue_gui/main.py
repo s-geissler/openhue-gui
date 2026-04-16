@@ -5,7 +5,9 @@ import subprocess
 import logging
 import tempfile
 import signal
+import sys
 from pathlib import Path
+from importlib.resources import files
 
 import gi
 gi.require_version("Gtk", "3.0")
@@ -14,14 +16,38 @@ from gi.repository import Gtk, AppIndicator3
 
 from PIL import Image
 
-from config import load_config
-from modes_schema import Mode
-from popup import show_popup
-from editor import show_editor
-from notify import notify_success, notify_error
+from .config import load_config
+from .modes_schema import Mode
+from .popup import show_popup
+from .editor import show_editor
+from .notify import notify_success, notify_error
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def _get_icon_path() -> str:
+    """Get the path to the bundled tray icon.
+
+    Uses importlib.resources to locate the icon whether running
+    from source (dev mode) or installed package.
+    """
+    # Try importlib.resources first (Python 3.9+)
+    if sys.version_info >= (3, 9):
+        try:
+            icon_path = files("openhue_gui").joinpath("icons", "tray-icon.png")
+            if icon_path.is_file():
+                return str(icon_path)
+        except Exception:
+            pass
+
+    # Fallback for dev mode: look relative to this file
+    dev_path = Path(__file__).parent / "icons" / "tray-icon.png"
+    if dev_path.is_file():
+        return str(dev_path)
+
+    # Final fallback: original hardcoded path (shouldn't reach here)
+    return "/usr/share/openhue-gui/icons/tray-icon.png"
 
 
 def _sigint_handler(signum, frame):
@@ -29,7 +55,7 @@ def _sigint_handler(signum, frame):
     logger.info("Received Ctrl+C, shutting down...")
     Gtk.main_quit()
 
-ICON_PATH = str(Path(__file__).parent / "icons" / "tray-icon.png")
+ICON_PATH = _get_icon_path()
 
 
 def hex_to_rgb(hex_color: str) -> tuple:
@@ -233,7 +259,7 @@ class OpenHueApp:
 
 
 # Import ModePopup here for use in this module
-from popup import ModePopup
+from .popup import ModePopup
 
 
 def main():

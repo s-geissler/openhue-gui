@@ -7,8 +7,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
-from modes_schema import Mode, Config
-from config import save_config
+from .modes_schema import Mode, Config
+from .config import save_config
 
 logger = logging.getLogger(__name__)
 

@@ -11,7 +11,7 @@ depends=(
     'python>=3.8'
     'python-pillow'
     'python-gobject'
-    'gir1.2-appindicator3-0.1'
+    'libappindicator'
     'gtk3'
 )
 makedepends=(
@@ -21,7 +21,7 @@ makedepends=(
 optdepends=(
     'openhue: CLI tool for Philips Hue'
 )
-source=("https://github.com/s-geissler/openhue-gui/archive/refs/tags/v${pkgver}.tar.gz")
+source=("https://github.com/s-geissler/openhue-gui/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('SKIP')
 
 build() {
@@ -31,12 +31,10 @@ build() {
 
 package() {
     cd "${pkgname}-${pkgver}"
+
+    # Install wheel using python installer
     python -m installer --destdir="${pkgdir}" dist/*.whl
 
-    # Install icon
-    install -Dm644 icons/tray-icon.png "${pkgdir}/usr/share/icons/hicolor/64x64/apps/openhue-gui.png"
-    update-icon-caches ${pkgdir}/usr/share/icons/hicolor 2>/dev/null || true
-
-    # Install desktop file
+    # Install desktop file for app menu
     install -Dm644 openhue-gui.desktop "${pkgdir}/usr/share/applications/openhue-gui.desktop"
 }

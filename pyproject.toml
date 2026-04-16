@@ -38,7 +38,12 @@ dev = [
 ]
 
 [project.scripts]
-openhue-gui = "main:main"
+openhue-gui = "openhue_gui.main:main"
 
-[tool.setuptools]
-py-modules = ["modes_schema", "config", "notify", "main", "popup", "editor"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["openhue_gui*"]
+exclude = ["openhue_gui.tests*"]
+
+[tool.setuptools.package-data]
+openhue_gui = ["icons/*.png", "icons/*.svg"]

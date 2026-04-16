@@ -7,7 +7,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, Pango
 
-from modes_schema import Mode, Config
+from .modes_schema import Mode, Config
 
 logger = logging.getLogger(__name__)
 
