@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=OpenHue GUI
+Comment=System tray GUI for Philips Hue control
+Exec=openhue-gui
+Icon=openhue-gui
+Terminal=false
+Type=Application
+Categories=Utility;HardwareSettings;
+Keywords=lights;hue;philips;automation;
+StartupNotify=false

@@ -6,11 +6,39 @@ build-backend = "setuptools.build_meta"
 name = "openhue-gui"
 version = "0.1.0"
 description = "System tray GUI for Philips Hue control via openhue CLI"
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
 requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: X11 Application :: GTK3",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Home Automation",
+]
 dependencies = [
     "Pillow",
     "PyGObject",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "build",
+    "twine",
+    "wheel",
+]
+
 [project.scripts]
 openhue-gui = "main:main"
+
+[tool.setuptools]
+py-modules = ["modes_schema", "config", "notify", "main", "popup", "editor"]

@@ -40,3 +40,6 @@ openhue-gui/
 
 # Config (user-specific)
 .config/openhue-gui/modes.json
+
+# AUR
+.SRCINFO
