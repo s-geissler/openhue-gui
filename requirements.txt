@@ -1,0 +1,8 @@
+# System packages required (install via apt/package manager):
+# gir1.2-appindicator3-0.1  (libappindicator)
+# python3-gi                 (GObject Introspection)
+# python3-gi-gtk3            (GTK3 bindings)
+
+# Python packages:
+Pillow
+PyGObject

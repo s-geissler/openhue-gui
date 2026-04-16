@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openhue-gui"
+version = "0.1.0"
+description = "System tray GUI for Philips Hue control via openhue CLI"
+requires-python = ">=3.8"
+dependencies = [
+    "Pillow",
+    "PyGObject",
+]
+
+[project.scripts]
+openhue-gui = "main:main"
